@@ -1,0 +1,14 @@
+{
+  "school": "와일드헌트 예술학원",
+  "clubs": [
+    {
+      "club": "오컬트 연구회",
+      "students": [
+        { "name": "시라오 에리", "birthday": "10/31" },
+        { "name": "시이나 츠무기", "birthday": "" },
+        { "name": "이타가키 카노에", "birthday": "11/02" },
+        { "name": "키누이 레나", "birthday": "" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "school": "발키리 경찰학교",
+  "clubs": [
+    {
+      "club": "공안국",
+      "students": [
+        { "name": "오가타 카나", "birthday": "09/07" }
+      ]
+    },
+    {
+      "club": "생활안전국",
+      "students": [
+        { "name": "나카츠카사 키리노", "birthday": "10/22" },
+        { "name": "네무가키 후부키", "birthday": "10/21" }
+      ]
+    }
+  ]
+}

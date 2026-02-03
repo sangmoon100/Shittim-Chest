@@ -1,0 +1,30 @@
+[
+    {
+      "name": "미래시",
+      "description": "미래시 사이트",
+      "reply": "https://arca.live/b/bluearchive/109570913\nhttps://gall.dcinside.com/mgallery/board/view/?id=projectmx&no=16393499"
+    },
+    {
+      "name": "토먼트조합",
+      "description": "총력전/대결전 도우미 사이트",
+      "reply": "https://bluearchive-torment.netlify.app/"
+    },
+    {
+      "name": "샬레디비",
+      "description": "데이터 베이스 사이트",
+      "reply": "https://schaledb.com/home"
+    },
+    {
+      "name": "지역공략",
+      "description": "지역 공략 도우미 사이트",
+      "reply": "https://juto.tistory.com/category/%EB%B8%94%EB%A3%A8%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C/%EC%9E%84%EB%AC%B4%EA%B3%B5%EB%9E%B5"
+    },
+    {
+      "name": "샬레당번추첨",
+      "description": "샬레 당번 학생을 랜덤으로 뽑습니다."
+    },
+    {
+      "name": "알람등록",
+      "description": "알람을 받을 채널을 등록합니다. (메인 1개 채널만 등록 가능)"
+    }
+]

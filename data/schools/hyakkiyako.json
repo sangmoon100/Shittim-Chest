@@ -1,0 +1,29 @@
+{
+  "school": "백귀야행 연합학원",
+  "clubs": [
+    {
+      "club": "음양부",
+      "students": [
+        { "name": "아마치 니야", "birthday": "01/01" },
+        { "name": "쿠와카미 카호", "birthday": "10/09" },
+        { "name": "와라쿠 치세", "birthday": "07/13" }
+      ]
+    },
+    {
+      "club": "마츠리운영관리부",
+      "students": [
+        { "name": "카와와 시즈코", "birthday": "07/07" },
+        { "name": "아사히나 피나", "birthday": "11/03" },
+        { "name": "사토하마 우미카", "birthday": "07/01" }
+      ]
+    },
+    {
+      "club": "수행부",
+      "students": [
+        { "name": "카스가 츠바키", "birthday": "02/03" },
+        { "name": "미즈하 미모리", "birthday": "03/15" },
+        { "name": "이사미 카에데", "birthday": "07/09" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "school": "트리니티 종합학원",
+  "clubs": [
+    {
+      "club": "티파티",
+      "students": [
+        { "name": "미소노 미카", "birthday": "05/08" },
+        { "name": "유리조노 세이아", "birthday": "09/29" },
+        { "name": "키리후지 나기사", "birthday": "07/04" }
+      ]
+    },
+    {
+      "club": "보충수업부",
+      "students": [
+        { "name": "아지타니 히후미", "birthday": "11/27" },
+        { "name": "시라스 아즈사", "birthday": "12/26" },
+        { "name": "우라와 하나코", "birthday": "01/03" },
+        { "name": "시모에 코하루", "birthday": "04/16" }
+      ]
+    },
+    {
+      "club": "시스터후드",
+      "students": [
+        { "name": "우타즈미 사쿠라코", "birthday": "10/04" },
+        { "name": "와카바 히나타", "birthday": "05/17" },
+        { "name": "이오치 마리", "birthday": "09/12" }
+      ]
+    }
+  ]
+}

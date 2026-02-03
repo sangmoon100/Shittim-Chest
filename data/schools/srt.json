@@ -1,0 +1,14 @@
+{
+  "school": "SRT 특수학원",
+  "clubs": [
+    {
+      "club": "래빗 소대",
+      "students": [
+        { "name": "츠키유키 미야코", "birthday": "01/07" },
+        { "name": "소라이 사키", "birthday": "04/09" },
+        { "name": "카제쿠라 모에", "birthday": "09/13" },
+        { "name": "카스미자와 미유", "birthday": "07/12" }
+      ]
+    }
+  ]
+}

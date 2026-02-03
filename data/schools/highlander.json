@@ -1,0 +1,18 @@
+{
+  "school": "하이랜더 철도학원",
+  "clubs": [
+    {
+      "club": "CCC",
+      "students": [
+        { "name": "타치바나 히카리", "birthday": "06/14" },
+        { "name": "타치바나 노조미", "birthday": "06/14" }
+      ]
+    },
+    {
+      "club": "화물운송관리부",
+      "students": [
+        { "name": "우츠미 아오바", "birthday": "07/19" }
+      ]
+    }
+  ]
+}

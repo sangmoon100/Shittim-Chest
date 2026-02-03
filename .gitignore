@@ -1,0 +1,8 @@
+# 의존성 폴더
+node_modules/
+
+# 환경 설정 파일
+.env
+
+# VSCode 설정 폴더
+.vscode/

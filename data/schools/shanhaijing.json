@@ -1,0 +1,19 @@
+{
+  "school": "산해경 고급중학교",
+  "clubs": [
+    {
+      "club": "현룡문",
+      "students": [
+        { "name": "류우게 키사키", "birthday": "02/19" },
+        { "name": "코노에 미나", "birthday": "09/09" }
+      ]
+    },
+    {
+      "club": "매화원",
+      "students": [
+        { "name": "스노하라 슌", "birthday": "02/05" },
+        { "name": "스노하라 코코나", "birthday": "06/01" }
+      ]
+    }
+  ]
+}
