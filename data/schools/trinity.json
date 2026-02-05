@@ -1,30 +1,70 @@
 {
-  "school": "트리니티 종합학원",
-  "clubs": [
-    {
-      "club": "티파티",
-      "students": [
-        { "name": "미소노 미카", "birthday": "05/08" },
-        { "name": "유리조노 세이아", "birthday": "09/29" },
-        { "name": "키리후지 나기사", "birthday": "07/04" }
-      ]
-    },
-    {
-      "club": "보충수업부",
-      "students": [
-        { "name": "아지타니 히후미", "birthday": "11/27" },
-        { "name": "시라스 아즈사", "birthday": "12/26" },
-        { "name": "우라와 하나코", "birthday": "01/03" },
-        { "name": "시모에 코하루", "birthday": "04/16" }
-      ]
-    },
-    {
-      "club": "시스터후드",
-      "students": [
-        { "name": "우타즈미 사쿠라코", "birthday": "10/04" },
-        { "name": "와카바 히나타", "birthday": "05/17" },
-        { "name": "이오치 마리", "birthday": "09/12" }
-      ]
-    }
-  ]
+    "school": "트리니티 종합학원",
+    "clubs": [
+        {
+            "club": "티파티",
+            "students": [
+                { "name": "미소노 미카", "birthday": "05/08" },
+                { "name": "유리조노 세이아", "birthday": "09/29" },
+                { "name": "키리후지 나기사", "birthday": "07/04" }
+            ]
+        },
+        {
+            "club": "보충수업부",
+            "students": [
+                { "name": "아지타니 히후미", "birthday": "11/27" },
+                { "name": "시라스 아즈사", "birthday": "12/26" },
+                { "name": "우라와 하나코", "birthday": "01/03" },
+                { "name": "시모에 코하루", "birthday": "04/16" }
+            ]
+        },
+        {
+            "club": "시스터후드",
+            "students": [
+                { "name": "우타즈미 사쿠라코", "birthday": "10/04" },
+                { "name": "와카바 히나타", "birthday": "05/17" },
+                { "name": "이오치 마리", "birthday": "09/12" }
+            ]
+        },
+        {
+            "club": "도서부",
+            "students": [
+                { "name": "코제키 우이", "birthday": "04/23" },
+                { "name": "엔도우 시미코", "birthday": "11/30" }
+            ]
+        },
+        {
+            "club": "방과후 디저트부",
+            "students": [
+                { "name": "쿠리무라 아이리", "birthday": "01/30" },
+                { "name": "코야마 카즈사", "birthday": "08/05" },
+                { "name": "이바라기 요시미", "birthday": "08/29" },
+                { "name": "유토리 나츠", "birthday": "12/04" }
+            ]
+        },
+        {
+            "club": "자경단",
+            "students": [
+                { "name": "모리즈키 스즈미", "birthday": "08/31" },
+                { "name": "우자와 레이사", "birthday": "05/31" }
+            ]
+        },
+        {
+            "club": "구호기사단",
+            "students": [
+                { "name": "아오모리 미네", "birthday": "11/23" },
+                { "name": "스미 세리나", "birthday": "01/06" },
+                { "name": "아사가오 하나에", "birthday": "05/12" }
+            ]
+        },
+        {
+            "club": "정의실현부",
+            "students": [
+                { "name": "켄자키 츠루기", "birthday": "06/24" },
+                { "name": "하네카와 하스미", "birthday": "12/12" },
+                { "name": "나카마사 이치카", "birthday": "11/11" },
+                { "name": "시즈야마 마시로", "birthday": "06/05" }
+            ]
+        }
+    ]
 }

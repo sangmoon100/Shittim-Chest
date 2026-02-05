@@ -24,6 +24,23 @@
         { "name": "미즈하 미모리", "birthday": "03/15" },
         { "name": "이사미 카에데", "birthday": "07/09" }
       ]
+    },
+    {
+      "club": "인법연구부",
+      "students": [
+        { "name": "치도리 미치루", "birthday": "02/22" },
+        { "name": "오노 츠쿠요", "birthday": "04/05" },
+        { "name": "쿠다 이즈나", "birthday": "12/16" }
+      ]
+    },
+    {
+      "club": "백화요란 분쟁조정위원회",
+      "students": [
+        { "name": "고료 나구사", "birthday": "12/07" },
+        { "name": "후와 렌게", "birthday": "07/23" },
+        { "name": "키류 키쿄", "birthday": "08/08" },
+        { "name": "카데노코지 유카리", "birthday": "06/16" }
+      ]
     }
   ]
 }

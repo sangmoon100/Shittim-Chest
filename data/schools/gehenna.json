@@ -1,0 +1,69 @@
+{
+    "school": "게헨나 학원",
+    "clubs": [
+        {
+          "club": "흥신소 68",
+          "students": [
+            { "name": "리쿠하치마 아루", "birthday": "03/12" },
+            { "name": "아사기 무츠키", "birthday": "07/29" },
+            { "name": "오니카타 카요코", "birthday": "03/17" },
+            { "name": "이구사 하루카", "birthday": "05/13" }
+          ]
+        },
+        {
+          "club": "선도부",
+          "students": [
+            { "name": "소라사키 히나", "birthday": "02/19" },
+            { "name": "쿠사카베 이오리", "birthday": "11/08" },
+            { "name": "아마우 아코", "birthday": "12/22" },
+            { "name": "히노미야 치나츠", "birthday": "08/22" }
+          ]
+        },
+        {
+          "club": "만마전",
+          "students": [
+            { "name": "하누마 마코토", "birthday": "03/19" },
+            { "name": "쿄고쿠 사츠키", "birthday": "04/10" },
+            { "name": "나츠메 이로하", "birthday": "11/16" },
+            { "name": "모토미야 치아키", "birthday": "09/22" },
+            { "name": "탄가 이부키", "birthday": "04/14" }
+          ]
+        },
+        {
+          "club": "미식연구회",
+          "students": [
+            { "name": "쿠로다테 하루나", "birthday": "03/01" },
+            { "name": "와니부치 아카리", "birthday": "12/09" },
+            { "name": "시시도우 이즈미", "birthday": "05/11" },
+            { "name": "아카시 준코", "birthday": "12/27" }
+          ]
+        },
+        {
+          "club": "급양부",
+          "students": [
+            { "name": "아이키요 후우카", "birthday": "04/30" },
+            { "name": "우시마키 주리", "birthday": "10/20" }
+          ]
+        },
+        {
+          "club": "응급의학부",
+          "students": [
+            { "name": "히무로 세나", "birthday": "04/07" }
+          ]
+        },
+        {
+          "club": "온천개발부",
+          "students": [
+            { "name": "키누가와 카스미", "birthday": "05/24" },
+            { "name": "시모쿠라 메구", "birthday": "04/25" }
+          ]
+        },
+        {
+          "club": "반짝반짝부",
+          "students": [
+            { "name": "요자쿠라 키라라", "birthday": "02/24" },
+            { "name": "하타미 에리카", "birthday": "02/01" }
+          ]
+        }
+    ]
+}

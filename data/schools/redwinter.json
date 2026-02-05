@@ -1,0 +1,33 @@
+{
+    "school": "붉은겨울 연방학원",
+    "clubs": [
+        {
+            "club": "붉은겨울 사무국",
+            "students": [
+                { "name": "렌카와 체리노", "birthday": "10/27" },
+                { "name": "사시로 토모에", "birthday": "11/10" },
+                { "name": "이케쿠라 마리나", "birthday": "11/04" }
+            ]
+        },
+        {
+            "club": "227호 특별반",
+            "students": [
+                { "name": "아마미 노도카", "birthday": "02/20" },
+                { "name": "마요이 시구레", "birthday": "01/22" }
+            ]
+        },
+        {
+            "club": "지식해방전선",
+            "students": [
+                { "name": "히메키 메루", "birthday": "12/21" },
+                { "name": "아키이즈미 모미지", "birthday": "08/07" }
+            ]
+        },
+        {
+            "club": "용역부",
+            "students": [
+                { "name": "야스모리 미노리", "birthday": "07/14" }
+            ]
+        }
+    ]
+}
