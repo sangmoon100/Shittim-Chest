@@ -5,6 +5,7 @@ const cron = require('node-cron');
 const { checkBirthdays } = require('./src/scheduler');
 const { randomStudent } = require('./src/randomStudent');
 const { loadAllSchoolsData } = require('./src/loadAllSchoolsData');
+const { openPort } = require('./src/webService');
 
 const client = new Client({
     intents: [
@@ -19,6 +20,7 @@ const studentsData = loadAllSchoolsData();
 
 // 봇 준비 완료 이벤트
 client.once('ready', () => {
+    openPort();
     console.log(`봇 로그인 완료: ${client.user.tag}`);
     // 매일 자정에 생일 체크
     cron.schedule('0 0 * * *', () => {
