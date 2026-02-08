@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { REST, Routes, SlashCommandBuilder } = require('discord.js');
 const fs = require('fs');
-const { loadAllSchoolsData } = require('./src/loadAllSchoolsData');
+const { loadAllSchoolsData } = require('./src/utils/loadAllSchoolsData');
 // JSON 파일 불러오기
 const commandsData = JSON.parse(fs.readFileSync('./data/commands.json', 'utf8'));
 const studentsData = loadAllSchoolsData();
