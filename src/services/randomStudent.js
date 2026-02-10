@@ -40,7 +40,7 @@ function _LinearCongruential(){
 
 _init(103);
 
-function randomStudent(studentsData = loadAllSchoolsData(), schoolName = null) {
+function randomStudent(studentsData, schoolName = null) {
     let totalStudent;
     if (schoolName) {
         const school = studentsData.schools.find(s => s.school === schoolName);
@@ -62,9 +62,9 @@ function randomStudent(studentsData = loadAllSchoolsData(), schoolName = null) {
 async function getRandomStudent(interaction) {
     const schoolOption = interaction.options.getString('학교');
     if (schoolOption) {
-        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsData, schoolOption)}`);
+        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsData=loadAllSchoolsData(), schoolOption)}`);
     } else { 
-        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsData)}`);
+        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsData=loadAllSchoolsData())}`);
     }
 }
 

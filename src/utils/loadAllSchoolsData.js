@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-function loadAllSchoolsData(dataDir = path.join(__dirname, '../data/schools')) {
+function loadAllSchoolsData(dataDir = path.join(__dirname, '../../data/schools')) {
     const files = fs.readdirSync(dataDir).filter(file => file.endsWith('.json'));
 
     const allData = {
