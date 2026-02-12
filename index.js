@@ -34,4 +34,4 @@ client.on('interactionCreate', async interaction => {
     await commandHandler(interaction);
 });
 
-client.login(process.env.TOKEN_DEV);
+client.login(process.env.TOKEN);
