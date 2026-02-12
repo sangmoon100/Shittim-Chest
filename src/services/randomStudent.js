@@ -1,4 +1,5 @@
-const { loadAllSchoolsData } = require('../utils/loadAllSchoolsData');
+const { loadAllSchoolsDataFromMongo } = require('../utils/loadAllSchoolsData');
+const { allSchoolsData } = require('../utils/init');
 
 let next = 1;
 let a,c = 0;
@@ -61,10 +62,11 @@ function randomStudent(studentsData, schoolName = null) {
 
 async function getRandomStudent(interaction) {
     const schoolOption = interaction.options.getString('학교');
+    const studentsAtSchools = allSchoolsData.schools.length > 0 ? allSchoolsData : await loadAllSchoolsDataFromMongo(); // 메모리에 데이터가 없으면 MongoDB에서 로드
     if (schoolOption) {
-        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsData=loadAllSchoolsData(), schoolOption)}`);
+        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsAtSchools, schoolOption)}`);
     } else { 
-        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsData=loadAllSchoolsData())}`);
+        await interaction.reply(`당번 추첨 결과: ${randomStudent(studentsAtSchools)}`);
     }
 }
 

@@ -2,6 +2,22 @@ const fs = require('fs');
 const path = require('path');
 const { loadAllSchoolsData } = require('./loadAllSchoolsData');
 
+// Mock loadAllSchoolsDataFromMongo to avoid MongoDB requirement in tests
+jest.mock('./loadAllSchoolsData', () => {
+    const actual = jest.requireActual('./loadAllSchoolsData');
+    return {
+        ...actual,
+        loadAllSchoolsDataFromMongo: jest.fn(async () => {
+            return [
+                {
+                    school: "몽고테스트학교",
+                    clubs: [{ club: "몽고동아리", students: [{ name: "몽고학생", birthday: "02/12" }] }]
+                }
+            ];
+        })
+    };
+});
+
 describe('loadAllSchoolsData', () => {
     const testDir = path.join(__dirname, 'test_schools');
 
@@ -16,8 +32,10 @@ describe('loadAllSchoolsData', () => {
             path.join(testDir, 'validSchool.json'),
             JSON.stringify({
                 school: "테스트학교",
-                clubs: ["동아리A", "동아리B"],
-                students: [{ name: "홍길동", birthday: "02-03" }]
+                clubs: [
+                    { club: "동아리A", students: [{ name: "홍길동", birthday: "02/12" }] },
+                    { club: "동아리B", students: [{ name: "김철수", birthday: "03/15" }] }
+                ]
             }, null, 4)
         );
 
@@ -25,7 +43,7 @@ describe('loadAllSchoolsData', () => {
         fs.writeFileSync(
             path.join(testDir, 'invalidSchool.json'),
             JSON.stringify({
-                clubs: ["동아리C"]
+                clubs: [{ club: "동아리C", students: [] }]
             }, null, 4)
         );
 
@@ -56,5 +74,22 @@ describe('loadAllSchoolsData', () => {
     test('깨진 JSON 파일은 로드 실패 처리된다', () => {
         const data = loadAllSchoolsData(testDir);
         expect(Array.isArray(data.schools)).toBe(true);
+    });
+
+    test('clubs 배열이 올바른 구조를 가진다', () => {
+        const data = loadAllSchoolsData(testDir);
+        const school = data.schools[0];
+        expect(Array.isArray(school.clubs)).toBe(true);
+        expect(school.clubs[0]).toHaveProperty('club');
+        expect(school.clubs[0]).toHaveProperty('students');
+        expect(Array.isArray(school.clubs[0].students)).toBe(true);
+    });
+
+    test('students 배열이 올바른 구조를 가진다', () => {
+        const data = loadAllSchoolsData(testDir);
+        const school = data.schools[0];
+        const student = school.clubs[0].students[0];
+        expect(student).toHaveProperty('name');
+        expect(student).toHaveProperty('birthday');
     });
 });

@@ -1,24 +1,34 @@
 require('dotenv').config();
 const { REST, Routes, SlashCommandBuilder } = require('discord.js');
 const fs = require('fs');
-const { loadAllSchoolsData } = require('./src/utils/loadAllSchoolsData');
+const path = require('path');
+const { loadAllSchoolsDataFromMongo } = require('./src/utils/loadAllSchoolsData');
+const { closeMongo } = require('./src/utils/mongoConnection');
 // JSON 파일 불러오기
-const commandsData = JSON.parse(fs.readFileSync('./data/commands.json', 'utf8'));
-const studentsData = loadAllSchoolsData();
+const commandsData = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'data', 'commands.json'), 'utf8')
+);
 
-const schools = studentsData.schools.map(school => ({
-    name: school.school,
-    value: school.school
-}));
-const schoolChoices = [...new Map(schools.map(school => [school.name, school])).values()];
+const rest = new REST().setToken(process.env.TOKEN_DEV);
 
-const commands = commandsData.map(cmd => {
-    if (cmd.reply) {
+(async () => {
+  let exitCode = 0;
+  try {
+    const studentsData = await loadAllSchoolsDataFromMongo();
+
+    const schools = studentsData.map(school => ({
+        name: school.school,
+        value: school.school
+    }));
+    const schoolChoices = [...new Map(schools.map(school => [school.name, school])).values()];
+
+    const commands = commandsData.map(cmd => {
+      if (cmd.reply) {
         return new SlashCommandBuilder()
           .setName(cmd.name)
           .setDescription(cmd.description)
           .toJSON()
-    } else if (cmd.name === "샬레당번추첨") {
+      } else if (cmd.name === "샬레당번추첨") {
         return new SlashCommandBuilder()
           .setName(cmd.name)
           .setDescription(cmd.description)
@@ -29,7 +39,7 @@ const commands = commandsData.map(cmd => {
                 .addChoices(...schoolChoices)
           )
           .toJSON()
-    } else if (cmd.name === "알람등록") {
+      } else if (cmd.name === "알람등록") {
         return new SlashCommandBuilder()
           .setName(cmd.name)
           .setDescription(cmd.description)
@@ -39,20 +49,23 @@ const commands = commandsData.map(cmd => {
                 .setRequired(true)
           )
           .toJSON()
-    }
-});
+      }
+    });
 
-const rest = new REST().setToken(process.env.TOKEN);
-
-(async () => {
-  try {
     console.log('명령어 등록 중...');
     await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID),
+      Routes.applicationCommands(process.env.CLIENT_ID_DEV),
       { body: commands },
     );
     console.log('명령어 등록 완료!');
   } catch (error) {
     console.error(error);
+    exitCode = 1;
+  } finally {
+    await closeMongo();
+    if (typeof rest.destroy === 'function') {
+      await rest.destroy();
+    }
   }
+  process.exitCode = exitCode;
 })();

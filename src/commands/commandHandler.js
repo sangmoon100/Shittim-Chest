@@ -1,9 +1,12 @@
 const fs = require('fs');
+const path = require('path');
 const { getRandomStudent } = require('../services/randomStudent');
 const { registerChannel } = require('../services/channelService');
 
 // JSON 파일 불러오기
-const commandsData = JSON.parse(fs.readFileSync('data/commands.json', 'utf8'));
+const commandsData = JSON.parse(
+    fs.readFileSync(path.join(__dirname, '../../data/commands.json'), 'utf8')
+);
 
 async function commandHandler(interaction) {
     const cmd = commandsData.find(c => c.name === interaction.commandName);

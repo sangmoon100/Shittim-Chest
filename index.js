@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const cron = require('node-cron');
-const { init } = require('./src/utils/init');
+const { init, allSchoolsData } = require('./src/utils/init');
 const { checkBirthdays } = require('./src/services/scheduler');
 const { commandHandler } = require('./src/commands/commandHandler');
 
@@ -14,13 +14,18 @@ const client = new Client({
 });
 
 // 봇 준비 완료 이벤트
-client.once('ready', () => {
-    init();
-    console.log(`봇 로그인 완료: ${client.user.tag}`);
-    // 매일 자정에 생일 체크
-    cron.schedule('0 0 * * *', () => {
-        checkBirthdays(client, studentsData);
-    },{ timezone: "Asia/Seoul" });
+client.once('ready', async () => {
+    try {
+        await init();
+        console.log(`봇 로그인 완료: ${client.user.tag}`);
+    } catch (e) {
+        console.error('초기화 중 오류 발생:', e);
+    } finally {
+        // 매일 자정에 생일 체크
+        cron.schedule('0 0 * * *', () => {
+            checkBirthdays(client, allSchoolsData);
+        },{ timezone: "Asia/Seoul" });
+    }
 
 });
 
@@ -29,4 +34,4 @@ client.on('interactionCreate', async interaction => {
     await commandHandler(interaction);
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN_DEV);

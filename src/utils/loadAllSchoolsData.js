@@ -1,5 +1,14 @@
 const fs = require('fs');
 const path = require('path');
+const { getCollection } = require('./mongoConnection');
+
+async function loadAllSchoolsDataFromMongo() {
+    const allDataMongo = await getCollection("schools");
+    
+    const allData = await allDataMongo.find({school: {$exists: true}}).toArray();
+
+    return allData;
+}
 
 function loadAllSchoolsData(dataDir = path.join(__dirname, '../../data/schools')) {
     const files = fs.readdirSync(dataDir).filter(file => file.endsWith('.json'));
@@ -28,4 +37,4 @@ function loadAllSchoolsData(dataDir = path.join(__dirname, '../../data/schools')
 
     return allData;
 }
-module.exports = { loadAllSchoolsData };
+module.exports = { loadAllSchoolsData, loadAllSchoolsDataFromMongo };
