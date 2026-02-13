@@ -15,20 +15,20 @@
 
 자동 동작:
 
-- 🎂 생일 알림: 매일 자정(Asia/Seoul)에 학생의 생일을 체크하여 등록된 채널로 알림을 전송합니다.
+- 🎂 생일 알림: 매일 아침 7시(Asia/Seoul)에 학생의 생일을 체크하여 등록된 채널로 알림을 전송합니다.
 
 📚 학교 목록: 아비도스, 아리우스, 게헨나, 하이랜더, 백귀야행, 밀레니엄, 붉은겨울, 산해경, SRT, 트리니티, 발키리, 와일드헌트
 
 ## 🧰 기술 스택
-- Node.js
-- discord.js v14
-- express (웹 프레임워크)
-- node-cron (작업 스케줄링)
-- dotenv (환경 설정)
-- Jest (테스팅)
-- MongoDB (데이터베이스)
+- Node.js (LTS 권장)
+- discord.js 14.25.1 (Discord API)
+- express 5.2.1 (웹 프레임워크)
+- node-cron 4.2.1 (작업 스케줄링)
+- dotenv 17.2.3 (환경 설정)
+- Jest 30.2.0 (테스팅)
+- MongoDB 7.1.0 (데이터베이스)
 
-## � 프로젝트 구조
+## 프로젝트 구조
 
 ```
 src/
@@ -37,14 +37,12 @@ src/
 ├── utils/            # 유틸리티 함수 (데이터 로드, 초기화 등)
 data/
 ├── commands.json     # 봇 명령어 정의
-├── channels.json     # 서버별 알람 채널 설정
-├── students.json     # 학생 정보 (선택적, 초기 데이터)
-schools/             # 학교별 학생 JSON 파일
+└── schools/          # 학교별 학생 JSON 파일 (로컬 로딩용)
 assets/
 └── images/          # 로고 및 아이콘
 ```
 
-## �📦 설치 및 실행
+## 📦 설치 및 실행
 
 ```bash
 npm install
@@ -57,16 +55,23 @@ npm test
 프로젝트 루트에 `.env` 파일을 생성하고 다음 변수들을 설정하세요:
 
 ```
-# Discord Bot Token (Discord Developer Portal에서 발급)
+# Discord Bot Token (봇 실행용)
 TOKEN=your_discord_bot_token_here
 
+# Discord Bot Token (명령어 배포용)
+TOKEN_DEV=your_discord_bot_token_here
+
+# Discord Application Client ID (명령어 배포용)
+CLIENT_ID_DEV=your_client_id_here
+
 # MongoDB 연결 문자열
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
 ```
 
 **참고:**
 - `TOKEN`: Discord Developer Portal에서 봇 생성 후 토큰 복사
-- `MONGODB_URI`: MongoDB Atlas 또는 로컬 MongoDB 연결 문자열
+- `TOKEN_DEV`, `CLIENT_ID_DEV`: 슬래시 명령어 배포 스크립트용
+- `MONGO_URI`: MongoDB Atlas 연결 문자열
 - 민감한 정보는 `.env` 파일에만 저장하고 절대 버전 관리에 추가하지 마세요
 
 ## 🚀 명령어 배포

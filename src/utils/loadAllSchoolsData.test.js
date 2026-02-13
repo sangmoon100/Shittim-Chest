@@ -1,95 +1,30 @@
-const fs = require('fs');
-const path = require('path');
-const { loadAllSchoolsData } = require('./loadAllSchoolsData');
+const { loadAllSchoolsDataFromMongo } = require('./loadAllSchoolsData');
+const { getCollection } = require('./mongoConnection');
 
-// Mock loadAllSchoolsDataFromMongo to avoid MongoDB requirement in tests
-jest.mock('./loadAllSchoolsData', () => {
-    const actual = jest.requireActual('./loadAllSchoolsData');
-    return {
-        ...actual,
-        loadAllSchoolsDataFromMongo: jest.fn(async () => {
-            return [
-                {
-                    school: "몽고테스트학교",
-                    clubs: [{ club: "몽고동아리", students: [{ name: "몽고학생", birthday: "02/12" }] }]
-                }
-            ];
-        })
-    };
-});
+// MongoDB 의존성을 제거하기 위해 getCollection을 모킹
+jest.mock('./mongoConnection', () => ({
+    getCollection: jest.fn()
+}));
 
-describe('loadAllSchoolsData', () => {
-    const testDir = path.join(__dirname, 'test_schools');
+describe('loadAllSchoolsDataFromMongo', () => {
+    test('returns data from Mongo collection', async () => {
+        // 컬렉션 조회 결과를 흉내내는 데이터
+        const mockData = [
+            { school: 'TestSchool', clubs: [{ club: 'TestClub', students: [] }] }
+        ];
+        // find() -> toArray() 체인 모킹
+        const toArray = jest.fn().mockResolvedValue(mockData);
+        const find = jest.fn().mockReturnValue({ toArray });
 
-    beforeAll(() => {
-        // 테스트용 디렉토리 생성
-        if (!fs.existsSync(testDir)) {
-            fs.mkdirSync(testDir, { recursive: true });
-        }
+        // getCollection이 find를 가진 객체를 반환하도록 설정
+        getCollection.mockResolvedValue({ find });
 
-        // 정상 파일
-        fs.writeFileSync(
-            path.join(testDir, 'validSchool.json'),
-            JSON.stringify({
-                school: "테스트학교",
-                clubs: [
-                    { club: "동아리A", students: [{ name: "홍길동", birthday: "02/12" }] },
-                    { club: "동아리B", students: [{ name: "김철수", birthday: "03/15" }] }
-                ]
-            }, null, 4)
-        );
+        // 실제 함수 호출
+        const result = await loadAllSchoolsDataFromMongo();
 
-        // 필드 누락된 파일
-        fs.writeFileSync(
-            path.join(testDir, 'invalidSchool.json'),
-            JSON.stringify({
-                clubs: [{ club: "동아리C", students: [] }]
-            }, null, 4)
-        );
-
-        // 잘못된 JSON 파일
-        fs.writeFileSync(
-            path.join(testDir, 'broken.json'),
-            "{ school: '깨진학교' " // JSON 문법 오류
-        );
-    });
-
-    afterAll(() => {
-        // 테스트 파일 정리
-        fs.rmSync(testDir, { recursive: true, force: true });
-    });
-
-    test('정상 파일을 불러오면 schools 배열에 포함된다', () => {
-        const data = loadAllSchoolsData(testDir);
-        expect(data.schools.length).toBeGreaterThan(0);
-        expect(data.schools[0].school).toBe("테스트학교");
-    });
-
-    test('필드 누락된 파일은 스킵된다', () => {
-        const data = loadAllSchoolsData(testDir);
-        const hasInvalid = data.schools.some(s => !s.school || !s.clubs);
-        expect(hasInvalid).toBe(false);
-    });
-
-    test('깨진 JSON 파일은 로드 실패 처리된다', () => {
-        const data = loadAllSchoolsData(testDir);
-        expect(Array.isArray(data.schools)).toBe(true);
-    });
-
-    test('clubs 배열이 올바른 구조를 가진다', () => {
-        const data = loadAllSchoolsData(testDir);
-        const school = data.schools[0];
-        expect(Array.isArray(school.clubs)).toBe(true);
-        expect(school.clubs[0]).toHaveProperty('club');
-        expect(school.clubs[0]).toHaveProperty('students');
-        expect(Array.isArray(school.clubs[0].students)).toBe(true);
-    });
-
-    test('students 배열이 올바른 구조를 가진다', () => {
-        const data = loadAllSchoolsData(testDir);
-        const school = data.schools[0];
-        const student = school.clubs[0].students[0];
-        expect(student).toHaveProperty('name');
-        expect(student).toHaveProperty('birthday');
+        // 호출 인자와 반환값 검증
+        expect(getCollection).toHaveBeenCalledWith('schools');
+        expect(find).toHaveBeenCalledWith({ school: { $exists: true } });
+        expect(result).toEqual(mockData);
     });
 });

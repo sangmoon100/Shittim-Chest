@@ -21,10 +21,10 @@ client.once('ready', async () => {
     } catch (e) {
         console.error('초기화 중 오류 발생:', e);
     } finally {
-        // 매일 자정에 생일 체크
-        cron.schedule('0 0 * * *', () => {
+        // 매일 아침 7시에 생일 체크 - 출근 시간대
+        cron.schedule('0 7 * * *', () => {
             checkBirthdays(client, allSchoolsData);
-        },{ timezone: "Asia/Seoul" });
+        },{ timezone: "Asia/Seoul" }); // 호스팅 서버 환경 시계가 한국 시간과 다를 수 있어 Asia/Seoul 타임존 명시
     }
 
 });

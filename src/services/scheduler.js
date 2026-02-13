@@ -5,7 +5,7 @@ async function checkBirthdays(client, studentsAtSchools) {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const todayStr = `${month}/${day}`;
-    
+    console.log(`오늘 날짜: ${todayStr} 🎂 - 생일 체크 시작`);
     try {
         const channelsCol = await getCollection("channels");
 
