@@ -6,7 +6,7 @@ let dbClient;
 // Only create client if URI is available
 if (uri) {
     dbClient = new MongoClient(uri,{
-        connectTimeoutMS: 5000, // 5초로 연결 타임아웃 설정
+        connectTimeoutMS: 10000, // 10초로 연결 타임아웃 설정
         maxConnecting: 20, // 최대 연결 시도 수
     });
 } else {
