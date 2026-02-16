@@ -1,4 +1,3 @@
-const { openPort } = require('./webService');
 const { connectToMongo } = require('./mongoConnection');
 const { loadAllSchoolsDataFromMongo } = require('./loadAllSchoolsData');
 
@@ -6,8 +5,6 @@ const { loadAllSchoolsDataFromMongo } = require('./loadAllSchoolsData');
 const allSchoolsData = { schools: [] };
 
 async function init() {
-    // start web service (synchronous)
-    openPort();
     // MonogoDB 연결
     await connectToMongo();
     

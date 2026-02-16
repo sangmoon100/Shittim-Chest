@@ -1,6 +1,6 @@
 const {MongoClient} = require('mongodb');
 
-const uri = process.env.MONGO_URI || 'mongodb://localhost:27017';
+const uri = process.env.MONGO_URI;
 let dbClient;
 
 // Only create client if URI is available

@@ -1,13 +1,47 @@
 const { getCollection } = require("../utils/mongoConnection");
 
-async function checkBirthdays(client, studentsAtSchools) {
+async function checkBirthdays(client) {
     const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const todayStr = `${month}/${day}`;
+    const options = { timeZone: "Asia/Seoul", month: "2-digit", day: "2-digit" };
+    const todayStr = today.toLocaleDateString("ko-KR", options);
     console.log(`오늘 날짜: ${todayStr} 🎂 - 생일 체크 시작`);
     try {
         const channelsCol = await getCollection("channels");
+        const schoolsCol = await getCollection("schools");
+
+        // MongoDB 집계 파이프라인으로 오늘 생일인 학생 조회
+        const getBirthday = [
+            {
+                "$unwind": {
+                    "path": "$clubs",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$clubs.students",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+            {
+                "$match": {
+                    "clubs.students.birthday": {
+                        "$regex": todayStr
+                    }
+                }
+            },
+            {
+                "$project": {
+                    "_id": 0,
+                    "school": 1,
+                    "club": "$clubs.club",
+                    "student": "$clubs.students"
+                }
+            }
+        ];
+
+        const birthdayStudents = await schoolsCol.aggregate(getBirthday).toArray();
+        console.log(`오늘 생일인 학생 ${birthdayStudents.length}명 발견`);
 
         for (const guild of client.guilds.cache.values()) { // 모든 길드(서버) 순회
             const channelDoc = await channelsCol.findOne({ guildId: guild.id }); // 해당 길드의 채널 문서 가져오기
@@ -18,20 +52,11 @@ async function checkBirthdays(client, studentsAtSchools) {
                     continue; // 다음 반복으로 넘어감
                 }
 
-                // 학생들 중 오늘 생일인 사람 찾기
-                // school → clubs → students 구조 순회 (동기적 배열이므로 for-of 사용)
-                for (const school of studentsAtSchools.schools) {
-                    for (const club of school.clubs) {
-                        for (const student of club.students) {
-                            if (student.birthday === todayStr) {
-                                if (targetChannel) {
-                                    await targetChannel.send(
-                                        `🎂 오늘은 **${student.name}** (${school.school}/${club.club})의 생일입니다! 축하해 주세요! 🎉`
-                                    );
-                                }
-                            }
-                        }
-                    }
+                // 오늘 생일인 학생들에게 축하 메시지 전송
+                for (const item of birthdayStudents) {
+                    await targetChannel.send(
+                        `🎂 오늘은 **${item.student.name}** (${item.school}/${item.club})의 생일입니다! 축하해 주세요! 🎉`
+                    );
                 }
             }
         }

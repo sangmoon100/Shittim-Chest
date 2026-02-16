@@ -80,23 +80,7 @@ MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
 node deploy-commands.js
 ```
 
-## 📡 호스팅 및 모니터링
+## 📡 호스팅
 
-- 호스팅: Render.com Web Service에 리포지토리를 연결하여 배포합니다. 서비스 설정에서 `Start Command`를 `npm start`로 지정하고 필요한 환경 변수(DISCORD 토큰 등)를 등록하세요.
-
-- 헬스 체크 (UptimeRobot): UptimeRobot에서 새 모니터를 추가합니다.
-	- Monitor Type: `HTTP(s)`
-	- URL: `https://<your-service>.onrender.com/` (또는 앱의 `/health` 엔드포인트)
-	- Interval: 5분 권장
-
-- 알림 수신(Discord Webhook): UptimeRobot의 Alert Contact로 `Webhook`을 추가하고, Discord의 Incoming Webhook URL을 입력하면 서비스 다운/복구 알림을 해당 채널로 받을 수 있습니다.
-
-- 팁: 더 정확한 체크를 위해 애플리케이션에 간단한 `/health`(200 OK) 엔드포인트를 구현하면 좋습니다. UptimeRobot이 해당 엔드포인트를 호출해 정상 동작 여부를 판단합니다.
-
-예시: UptimeRobot 설정 요약
-
-```text
-Monitor: HTTP(s)  https://your-service.onrender.com/  (Interval: 5 minutes)
-Alert Contact: Webhook  https://discord.com/api/webhooks/....
-```
-
+- 호스팅: Render.com에 리포지토리를 연결해 배포합니다.
+- Background Worker: 봇 실행용(추천). `Build Command`는 `npm install`, `Start Command`는 `npm start`로 설정합니다.
