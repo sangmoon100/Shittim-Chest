@@ -1,14 +1,27 @@
-const fs = require('fs');
-const path = require('path');
 const { getRandomStudent } = require('../services/randomStudent');
 const { registerChannel } = require('../services/channelService');
+const { getCollection } = require('../utils/mongoConnection');
 
-// JSON 파일 불러오기
-const commandsData = JSON.parse(
-    fs.readFileSync(path.join(__dirname, '../../data/commands.json'), 'utf8')
-);
+// 명령어 데이터를 메모리에 캐싱
+let commandsData = [];
+
+async function loadCommandsData() {
+    try {
+        const commandsCollection = await getCollection('commands');
+        commandsData = await commandsCollection.find({}).toArray();
+        console.log(`📋 MongoDB에서 ${commandsData.length}개의 명령어를 로드했습니다.`);
+    } catch (error) {
+        console.error('❌ 명령어 데이터 로드 실패:', error);
+        commandsData = [];
+    }
+}
 
 async function commandHandler(interaction) {
+    // 명령어 데이터가 비어있으면 로드
+    if (commandsData.length === 0) {
+        await loadCommandsData();
+    }
+
     const cmd = commandsData.find(c => c.name === interaction.commandName);
     if (cmd && cmd.reply) {
         await interaction.reply(cmd.reply);
@@ -21,4 +34,4 @@ async function commandHandler(interaction) {
     }
 }
 
-module.exports = { commandHandler };
+module.exports = { commandHandler, loadCommandsData };

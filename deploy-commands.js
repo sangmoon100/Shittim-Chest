@@ -1,19 +1,18 @@
 require('dotenv').config();
 const { REST, Routes, SlashCommandBuilder } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
 const { loadAllSchoolsDataFromMongo } = require('./src/utils/loadAllSchoolsData');
-const { closeMongo } = require('./src/utils/mongoConnection');
-// JSON 파일 불러오기
-const commandsData = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'data', 'commands.json'), 'utf8')
-);
+const { closeMongo, getCollection } = require('./src/utils/mongoConnection');
 
 const rest = new REST().setToken(process.env.TOKEN_DEV);
 
 (async () => {
   let exitCode = 0;
   try {
+    // MongoDB에서 명령어 데이터 불러오기
+    const commandsCollection = await getCollection('commands');
+    const commandsData = await commandsCollection.find({}).toArray();
+    console.log(`📋 MongoDB에서 ${commandsData.length}개의 명령어를 불러왔습니다.`);
+
     const studentsData = await loadAllSchoolsDataFromMongo();
 
     const schools = studentsData.map(school => ({

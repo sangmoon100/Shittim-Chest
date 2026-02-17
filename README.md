@@ -80,6 +80,22 @@ MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
 node deploy-commands.js
 ```
 
+## 🔄 DevOps 파이프라인
+
+### CI (Continuous Integration)
+- **플랫폼**: GitHub Actions
+- **테스트**: Jest를 활용한 자동화된 테스트 실행
+- **트리거**: Pull Request 및 Push 시 자동 실행
+- **워크플로우**: 코드 품질 검증 및 유닛 테스트 수행
+
+### CD (Continuous Deployment)
+- **플랫폼**: Render.com
+- **배포 방식**: GitHub Push Trigger 기반 자동 배포
+- **트리거**: main/master 브랜치에 Push 시 자동 배포
+- **배포 타입**: Background Worker (봇 실행용)
+  - `Build Command`: `npm install`
+  - `Start Command`: `npm start`
+
 ## 📡 호스팅
 
 - 호스팅: Render.com에 리포지토리를 연결해 배포합니다.
