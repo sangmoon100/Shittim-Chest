@@ -2,8 +2,10 @@ const { getCollection } = require("../utils/mongoConnection");
 
 async function checkBirthdays(client) {
     const today = new Date();
-    const options = { timeZone: "Asia/Seoul", month: "2-digit", day: "2-digit" };
-    const todayStr = today.toLocaleDateString("ko-KR", options);
+    const koreaDate = new Date(today.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+    const month = String(koreaDate.getMonth() + 1).padStart(2, '0');
+    const day = String(koreaDate.getDate()).padStart(2, '0');
+    const todayStr = `${month}/${day}`;
     console.log(`오늘 날짜: ${todayStr} 🎂 - 생일 체크 시작`);
     try {
         const channelsCol = await getCollection("channels");
