@@ -79,4 +79,4 @@ async function handleCalendarButton(interaction) {
     }
 }
 
-client.login(process.env.TOKEN_DEV);
+client.login(process.env.TOKEN);

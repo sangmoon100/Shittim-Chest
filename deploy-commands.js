@@ -3,7 +3,7 @@ const { REST, Routes, SlashCommandBuilder } = require('discord.js');
 const { loadAllSchoolsDataFromMongo } = require('./src/utils/loadAllSchoolsData');
 const { closeMongo, getCollection } = require('./src/utils/mongoConnection');
 
-const rest = new REST().setToken(process.env.TOKEN_DEV);
+const rest = new REST().setToken(process.env.TOKEN);
 
 (async () => {
   let exitCode = 0;
@@ -72,7 +72,7 @@ const rest = new REST().setToken(process.env.TOKEN_DEV);
 
     console.log('명령어 등록 중...');
     await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID_DEV),
+      Routes.applicationCommands(process.env.CLIENT_ID),
       { body: commands },
     );
     console.log('명령어 등록 완료!');
