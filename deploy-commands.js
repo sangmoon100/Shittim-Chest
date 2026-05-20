@@ -48,6 +48,25 @@ const rest = new REST().setToken(process.env.TOKEN_DEV);
                 .setRequired(true)
           )
           .toJSON()
+      } else if (cmd.name === "캘린더") {
+        return new SlashCommandBuilder()
+          .setName(cmd.name)
+          .setDescription(cmd.description)
+          .addIntegerOption(option =>
+              option.setName('년도')
+                .setDescription('연도를 입력하세요 (기본: 현재 년도)')
+                .setRequired(false)
+                .setMinValue(2020)
+                .setMaxValue(2030)
+          )
+          .addIntegerOption(option =>
+              option.setName('월')
+                .setDescription('월을 입력하세요 (기본: 현재 월)')
+                .setRequired(false)
+                .setMinValue(1)
+                .setMaxValue(12)
+          )
+          .toJSON()
       }
     });
 
