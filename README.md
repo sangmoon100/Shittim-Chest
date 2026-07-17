@@ -95,6 +95,7 @@ node deploy-commands.js
 - **배포 타입**: Background Worker (봇 실행용)
   - `Build Command`: `npm install`
   - `Start Command`: `npm start`
+  - `postinstall` 단계에서 캘린더 한글 렌더링용 폰트를 자동 다운로드합니다.
 
 ## 📡 호스팅
 

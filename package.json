@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node scripts/ensure-korean-font.js",
     "test": "jest",
     "start": "node index.js"
   },

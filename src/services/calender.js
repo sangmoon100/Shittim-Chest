@@ -7,24 +7,33 @@ const CALENDAR_FONT_FAMILY = 'ShittimCalendarKR';
 let hasRegisteredKoreanFont = false;
 
 function setupCalendarFont() {
-    const bundledFontPath = path.join(process.cwd(), 'assets', 'fonts', 'NotoSansKR-Regular.ttf');
-    const windowsFontPath = 'C:/Windows/Fonts/malgun.ttf';
+    const candidateFontPaths = [
+        path.join(process.cwd(), 'assets', 'fonts', 'NotoSansKR-Regular.otf'),
+        path.join(process.cwd(), 'assets', 'fonts', 'NotoSansKR-Regular.ttf'),
+        // Common Linux font paths (Render native runtime)
+        '/usr/share/fonts/truetype/noto/NotoSansKR-Regular.ttf',
+        '/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc',
+        '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',
+        '/usr/share/fonts/truetype/nanum/NanumGothic.ttf',
+        // Windows fallback for local dev
+        'C:/Windows/Fonts/malgun.ttf'
+    ];
 
     try {
-        if (fs.existsSync(bundledFontPath)) {
-            registerFont(bundledFontPath, { family: CALENDAR_FONT_FAMILY });
-            hasRegisteredKoreanFont = true;
-            return;
-        }
+        for (const fontPath of candidateFontPaths) {
+            if (!fs.existsSync(fontPath)) {
+                continue;
+            }
 
-        if (fs.existsSync(windowsFontPath)) {
-            registerFont(windowsFontPath, { family: CALENDAR_FONT_FAMILY });
+            registerFont(fontPath, { family: CALENDAR_FONT_FAMILY });
             hasRegisteredKoreanFont = true;
             return;
         }
     } catch (error) {
         console.warn('캘린더 폰트 로딩 실패, 시스템 기본 폰트로 진행합니다:', error.message);
     }
+
+    console.warn('한글 폰트를 찾지 못해 캘린더 텍스트가 깨질 수 있습니다. assets/fonts/NotoSansKR-Regular.otf를 확인하세요.');
 }
 
 setupCalendarFont();
